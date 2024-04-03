@@ -72,7 +72,7 @@ public class RemarkCommand extends Command {
             editedPerson = new Employee(personToEdit.getId(), personToEdit.getName(), personToEdit.getPhone(),
                     personToEdit.getEmail(), personToEdit.getAddress(), remark, personToEdit.getTags(), (
                     (Employee) personToEdit).getDepartment(), ((Employee) personToEdit).getJobTitle(), (
-                    (Employee) personToEdit).getSkills());
+                    (Employee) personToEdit).getSkills(), ((Employee) personToEdit).getBirthday());
         } else {
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_ID, id.value));
         }

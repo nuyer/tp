@@ -16,27 +16,30 @@ public class Employee extends Person {
     private final Department department;
     private final JobTitle jobTitle;
     private Skills skills = new Skills(new HashSet<>());
+    private final Birthday birthday;
 
     /**
      * Every field must be present and not null.
      */
     public Employee(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags,
-                    Department department, JobTitle jobTitle, Skills skills) {
+                    Department department, JobTitle jobTitle, Skills skills, Birthday birthday) {
         super(name, phone, email, address, tags, remark);
         this.department = department;
         this.jobTitle = jobTitle;
         this.skills = skills;
+        this.birthday = birthday;
     }
 
     /**
      * Every field must be present and not null.
      */
     public Employee(Id id, Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags,
-                    Department department, JobTitle jobTitle, Skills skills) {
+                    Department department, JobTitle jobTitle, Skills skills, Birthday birthday) {
         super(id, name, phone, email, address, tags, remark);
         this.department = department;
         this.jobTitle = jobTitle;
         this.skills = skills;
+        this.birthday = birthday;
     }
 
     /**
@@ -64,6 +67,15 @@ public class Employee extends Person {
      */
     public Skills getSkills() {
         return this.skills;
+    }
+
+    /**
+     * Returns the birthday of the employee.
+     *
+     * @return The birthday of the employee.
+     */
+    public Birthday getBirthday() {
+        return this.birthday;
     }
 
     public String getRole() {

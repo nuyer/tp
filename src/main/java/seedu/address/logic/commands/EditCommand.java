@@ -1,19 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBTITLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERENCES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCTS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILLS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TERMSOFSERVICE;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -27,6 +15,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Client;
 import seedu.address.model.person.Department;
 import seedu.address.model.person.Email;
@@ -66,7 +55,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_SKILLS + "SKILLS] "
             + "[" + PREFIX_PRODUCTS + "PRODUCTS] "
             + "[" + PREFIX_TERMSOFSERVICE + "TERMSOFSERVICE] "
-            + "[" + PREFIX_PREFERENCES + "PREFERENCES]\n"
+            + "[" + PREFIX_PREFERENCES + "PREFERENCES]"
+            + "[" + PREFIX_BIRTHDAY + "BIRTHDAY]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ID + "1 "
             + PREFIX_PHONE + "91234567 "
@@ -148,8 +138,9 @@ public class EditCommand extends Command {
             JobTitle updatedJobTitle = editPersonDescriptor.getJobTitle()
                     .orElse(((Employee) personToEdit).getJobTitle());
             Skills updatedSkills = editPersonDescriptor.getSkills().orElse(((Employee) personToEdit).getSkills());
+            Birthday updatedBirthday = editPersonDescriptor.getBirthday().orElse(((Employee) personToEdit).getBirthday());
             return new Employee(idOfPerson, updatedName, updatedPhone, updatedEmail, updatedAddress,
-                    updatedRemark, updatedTags, updatedDepartment, updatedJobTitle, updatedSkills);
+                    updatedRemark, updatedTags, updatedDepartment, updatedJobTitle, updatedSkills, updatedBirthday);
         } else if (personToEdit instanceof Supplier) {
             if (editPersonDescriptor.getDepartment().isPresent() || editPersonDescriptor.getJobTitle().isPresent()
                     || editPersonDescriptor.getSkills().isPresent()) {
@@ -207,6 +198,7 @@ public class EditCommand extends Command {
         private Products products;
         private TermsOfService termsOfService;
         private String preferences;
+        private Birthday birthday;
 
         public EditPersonDescriptor() {}
 
@@ -227,6 +219,7 @@ public class EditCommand extends Command {
             setProducts(toCopy.products);
             setTermsOfService(toCopy.termsOfService);
             setPreferences(toCopy.preferences);
+            setBirthday(toCopy.birthday);
         }
 
         /**
@@ -234,7 +227,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, remark, department, jobTitle, skills,
-                    products, termsOfService, preferences);
+                    products, termsOfService, preferences, birthday);
         }
 
         public void setName(Name name) {
@@ -341,6 +334,12 @@ public class EditCommand extends Command {
         public Optional<String> getPreferences() {
             return Optional.ofNullable(preferences);
         }
+        public void setBirthday(Birthday birthday) {
+            this.birthday = birthday;
+        }
+        public Optional<Birthday> getBirthday() {
+            return Optional.ofNullable(birthday);
+        }
 
         @Override
         public boolean equals(Object other) {
@@ -365,7 +364,8 @@ public class EditCommand extends Command {
                     && Objects.equals(skills, otherEditPersonDescriptor.skills)
                     && Objects.equals(products, otherEditPersonDescriptor.products)
                     && Objects.equals(termsOfService, otherEditPersonDescriptor.termsOfService)
-                    && Objects.equals(preferences, otherEditPersonDescriptor.preferences);
+                    && Objects.equals(preferences, otherEditPersonDescriptor.preferences)
+                    && Objects.equals(birthday, otherEditPersonDescriptor.birthday);
         }
 
         @Override
@@ -383,6 +383,7 @@ public class EditCommand extends Command {
                     .add("products", products)
                     .add("termsOfService", termsOfService)
                     .add("preferences", preferences)
+                    .add("birthday", birthday)
                     .toString();
         }
     }

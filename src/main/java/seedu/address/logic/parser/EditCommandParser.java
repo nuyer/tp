@@ -2,20 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBTITLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERENCES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCTS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILLS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TERMSOFSERVICE;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -44,7 +31,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_NAME, PREFIX_PHONE,
                 PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_PREFERENCES, PREFIX_PRODUCTS, PREFIX_DEPARTMENT,
-                PREFIX_JOBTITLE, PREFIX_SKILLS, PREFIX_ROLE, PREFIX_TERMSOFSERVICE, PREFIX_REMARK);
+                PREFIX_JOBTITLE, PREFIX_SKILLS, PREFIX_ROLE, PREFIX_TERMSOFSERVICE, PREFIX_BIRTHDAY, PREFIX_REMARK);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
@@ -114,6 +101,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_TERMSOFSERVICE).isPresent()) {
             editPersonDescriptor.setTermsOfService(
                     ParserUtil.parseTermsOfService(argMultimap.getValue(PREFIX_TERMSOFSERVICE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_BIRTHDAY).isPresent()) {
+            editPersonDescriptor.setBirthday(
+                    ParserUtil.parseBirthday(argMultimap.getValue(PREFIX_BIRTHDAY).get()));
         }
     }
 

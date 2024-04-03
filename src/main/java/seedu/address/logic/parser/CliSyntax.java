@@ -20,6 +20,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_TERMSOFSERVICE = new Prefix("tos/");
     public static final Prefix PREFIX_ROLE = new Prefix("role/");
     public static final Prefix PREFIX_SKILLS = new Prefix("skills/");
+    public static final Prefix PREFIX_BIRTHDAY = new Prefix("bd/");
     public static final Prefix PREFIX_REMARK = new Prefix("r/");
 
 }

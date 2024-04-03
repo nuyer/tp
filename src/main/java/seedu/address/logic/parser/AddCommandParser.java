@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBTITLE;
@@ -24,6 +25,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Client;
 import seedu.address.model.person.Department;
 import seedu.address.model.person.Email;
@@ -53,7 +55,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ADDRESS, PREFIX_TAG, PREFIX_REMARK, PREFIX_ROLE, PREFIX_PREFERENCES, PREFIX_PRODUCTS,
-                PREFIX_DEPARTMENT, PREFIX_JOBTITLE, PREFIX_TERMSOFSERVICE, PREFIX_SKILLS);
+                PREFIX_DEPARTMENT, PREFIX_JOBTITLE, PREFIX_TERMSOFSERVICE, PREFIX_SKILLS, PREFIX_BIRTHDAY);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROLE)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -84,12 +86,14 @@ public class AddCommandParser implements Parser<AddCommand> {
             Optional<String> optionalDepartment = argMultimap.getValue(PREFIX_DEPARTMENT);
             Optional<String> optionalJobTitle = argMultimap.getValue(PREFIX_JOBTITLE);
             Optional<List<String>> optionalSkills = Optional.ofNullable(argMultimap.getAllValues(PREFIX_SKILLS));
+            Optional<String> optionalBirthday = argMultimap.getValue(PREFIX_BIRTHDAY);
             Department department = optionalDepartment.isPresent() ? optionalDepartment.map(Department::new).get()
                     : new Department("-");
             JobTitle jobTitle = optionalJobTitle.isPresent() ? optionalJobTitle.map(JobTitle::new).get()
                     : new JobTitle("-");
             Skills skills = ParserUtil.parseSkills(optionalSkills.orElse(Collections.emptyList()));
-            person = new Employee(name, phone, email, address, remark, tagList, department, jobTitle, skills);
+            Birthday birthday = ParserUtil.parseBirthday(optionalBirthday.orElse(null));
+            person = new Employee(name, phone, email, address, remark, tagList, department, jobTitle, skills, birthday);
             break;
         case "supplier":
             Optional<List<String>> optionalSupplierProducts = Optional.ofNullable(argMultimap
