@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
 public class Birthday {
 
@@ -18,6 +19,11 @@ public class Birthday {
 
     public Birthday(LocalDate date) {
         this.date = date;
+    }
+
+    public Birthday(String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        this.date = LocalDate.parse(date, formatter);
     }
 
     public LocalDate getDate() {
