@@ -1,7 +1,20 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBTITLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERENCES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCTS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILLS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TERMSOFSERVICE;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -138,7 +151,8 @@ public class EditCommand extends Command {
             JobTitle updatedJobTitle = editPersonDescriptor.getJobTitle()
                     .orElse(((Employee) personToEdit).getJobTitle());
             Skills updatedSkills = editPersonDescriptor.getSkills().orElse(((Employee) personToEdit).getSkills());
-            Birthday updatedBirthday = editPersonDescriptor.getBirthday().orElse(((Employee) personToEdit).getBirthday());
+            Birthday updatedBirthday = editPersonDescriptor
+                    .getBirthday().orElse(((Employee) personToEdit).getBirthday());
             return new Employee(idOfPerson, updatedName, updatedPhone, updatedEmail, updatedAddress,
                     updatedRemark, updatedTags, updatedDepartment, updatedJobTitle, updatedSkills, updatedBirthday);
         } else if (personToEdit instanceof Supplier) {

@@ -6,8 +6,10 @@ import java.time.format.DateTimeFormatter;
 
 public class Birthday {
 
-    public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format. Date should be in the format dd-MM-yyyy.";
-    public static final String MESSAGE_INVALID_DATE = "Employee must be at least " + Birthday.MAXIMUM_AGE + " years old and less than " + Birthday.MAXIMUM_AGE + " years old.";
+    public static final String MESSAGE_INVALID_DATE_FORMAT =
+            "Invalid date format. Date should be in the format dd-MM-yyyy.";
+    public static final String MESSAGE_INVALID_DATE = "Employee must be at least "
+            + Birthday.MAXIMUM_AGE + " years old and less than " + Birthday.MAXIMUM_AGE + " years old.";
     private static final int MINIMUM_AGE = 10;
     private static final int MAXIMUM_AGE = 100;
 

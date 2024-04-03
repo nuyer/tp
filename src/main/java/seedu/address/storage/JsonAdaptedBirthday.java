@@ -3,8 +3,6 @@ package seedu.address.storage;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Birthday;
 
-import java.time.LocalDate;
-
 /**
  * Jackson-friendly version of {@link Birthday}.
  */
