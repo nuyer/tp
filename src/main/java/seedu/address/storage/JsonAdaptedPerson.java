@@ -10,21 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Client;
-import seedu.address.model.person.Department;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Employee;
-import seedu.address.model.person.Id;
-import seedu.address.model.person.JobTitle;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Products;
-import seedu.address.model.person.Remark;
-import seedu.address.model.person.Skills;
-import seedu.address.model.person.Supplier;
-import seedu.address.model.person.TermsOfService;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -47,6 +33,7 @@ class JsonAdaptedPerson {
     private final JsonAdaptedProducts products;
     private final String preferences;
     private final TermsOfService termsOfService;
+    private final Birthday birthday;
     private final JsonAdaptedSkills skills;
     private final String role;
 
@@ -64,6 +51,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("jobTitle") JobTitle jobTitle,
                              @JsonProperty("termsOfService") TermsOfService termsOfService,
                              @JsonProperty("skills") JsonAdaptedSkills skills,
+                             @JsonProperty("birthday") Birthday birthday,
                              @JsonProperty("remark") String remark) {
         this.id = id;
         this.name = name;
@@ -81,6 +69,7 @@ class JsonAdaptedPerson {
         this.jobTitle = jobTitle == null ? new JobTitle() : jobTitle;
         this.termsOfService = termsOfService == null ? new TermsOfService() : termsOfService;
         this.skills = skills == null ? new JsonAdaptedSkills(new HashSet<>()) : skills;
+        this.birthday = birthday  == null ? new Birthday() : birthday;
     }
 
     /**
@@ -104,6 +93,7 @@ class JsonAdaptedPerson {
             department = null;
             jobTitle = null;
             termsOfService = null;
+            birthday = null;
         } else if (source instanceof Employee) {
             role = "employee";
             department = ((Employee) source).getDepartment();
@@ -112,6 +102,7 @@ class JsonAdaptedPerson {
             termsOfService = null;
             skills = new JsonAdaptedSkills(((Employee) source).getSkills().getSkills());
             products = new JsonAdaptedProducts(new ArrayList<>());
+            birthday = new Birthday();
         } else if (source instanceof Supplier) {
             role = "supplier";
             products = new JsonAdaptedProducts(((Supplier) source).getProducts());
@@ -120,6 +111,7 @@ class JsonAdaptedPerson {
             preferences = "";
             department = null;
             jobTitle = null;
+            birthday = null;
         } else {
             role = "unknown";
             preferences = "";
@@ -128,6 +120,7 @@ class JsonAdaptedPerson {
             termsOfService = null;
             products = new JsonAdaptedProducts(new ArrayList<>());
             skills = new JsonAdaptedSkills(new HashSet<>());
+            birthday = null;
         }
     }
 
@@ -265,7 +258,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Employee(modelId, modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags,
-                department, jobTitle, transformedSkills);
+                department, jobTitle, transformedSkills, birthday);
     }
 
     /**

@@ -12,6 +12,10 @@ public class Birthday {
 
     private final Date date;
 
+    public Birthday() {
+        this.date = null;
+    }
+
     public Birthday(Date date) {
         this.date = date;
     }
