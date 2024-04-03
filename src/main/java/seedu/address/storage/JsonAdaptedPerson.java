@@ -33,7 +33,7 @@ class JsonAdaptedPerson {
     private final JsonAdaptedProducts products;
     private final String preferences;
     private final TermsOfService termsOfService;
-    private final Birthday birthday;
+    private final JsonAdaptedBirthday birthday;
     private final JsonAdaptedSkills skills;
     private final String role;
 
@@ -51,7 +51,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("jobTitle") JobTitle jobTitle,
                              @JsonProperty("termsOfService") TermsOfService termsOfService,
                              @JsonProperty("skills") JsonAdaptedSkills skills,
-                             @JsonProperty("birthday") Birthday birthday,
+                             @JsonProperty("birthday") JsonAdaptedBirthday birthday,
                              @JsonProperty("remark") String remark) {
         this.id = id;
         this.name = name;
@@ -69,7 +69,7 @@ class JsonAdaptedPerson {
         this.jobTitle = jobTitle == null ? new JobTitle() : jobTitle;
         this.termsOfService = termsOfService == null ? new TermsOfService() : termsOfService;
         this.skills = skills == null ? new JsonAdaptedSkills(new HashSet<>()) : skills;
-        this.birthday = birthday  == null ? new Birthday() : birthday;
+        this.birthday = birthday  == null ? new JsonAdaptedBirthday(new Birthday()) : birthday;
     }
 
     /**
@@ -102,7 +102,7 @@ class JsonAdaptedPerson {
             termsOfService = null;
             skills = new JsonAdaptedSkills(((Employee) source).getSkills().getSkills());
             products = new JsonAdaptedProducts(new ArrayList<>());
-            birthday = new Birthday();
+            birthday = new JsonAdaptedBirthday(((Employee) source).getBirthday());
         } else if (source instanceof Supplier) {
             role = "supplier";
             products = new JsonAdaptedProducts(((Supplier) source).getProducts());
@@ -256,9 +256,11 @@ class JsonAdaptedPerson {
 
         final Skills transformedSkills = skills == null ? new Skills() : this.skills.toModelType();
 
+        final Birthday modelBirthday = birthday == null ? new Birthday() : this.birthday.toModelType();
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Employee(modelId, modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags,
-                department, jobTitle, transformedSkills, birthday);
+                department, jobTitle, transformedSkills, modelBirthday);
     }
 
     /**
