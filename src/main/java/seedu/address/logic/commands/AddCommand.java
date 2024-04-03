@@ -58,8 +58,8 @@ public class AddCommand extends Command {
             + PREFIX_PREFERENCES + "Likes to work from home "
             + PREFIX_TERMSOFSERVICE + "2 years "
             + PREFIX_PRODUCTS + "Laptop "
-            + PREFIX_SKILLS + "Java"
-            + PREFIX_BIRTHDAY + "25/12/2002";
+            + PREFIX_SKILLS + "Java "
+            + PREFIX_BIRTHDAY + "25-12-2002";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";

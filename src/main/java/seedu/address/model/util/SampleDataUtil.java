@@ -32,7 +32,7 @@ public class SampleDataUtil {
                 getTagSet("colleagues", "friends"), new Department("HR"),
                 new JobTitle("HR Manager"),
                 new Skills(new HashSet<String>(
-                        Arrays.asList("Recruitment", "Training", "Payroll"))), new Birthday("24/03/2001")),
+                        Arrays.asList("Recruitment", "Training", "Payroll"))), new Birthday("24-03-2001")),
             new Supplier(new Name("Charlotte Oliveiro"), new Phone("93210283"),
                 new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), EMPTY_REMARK,
@@ -54,7 +54,7 @@ public class SampleDataUtil {
                 getTagSet("classmates"), new Department("IT"),
                 new JobTitle("Software Engineer"),
                 new Skills(new HashSet<String>(
-                        Arrays.asList("Java", "Python", "C++"))), new Birthday("13/02/1996")),
+                        Arrays.asList("Java", "Python", "C++"))), new Birthday("13-02-1996")),
             new Supplier(new Name("Roy Balakrishnan"), new Phone("92624417"),
                 new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"), EMPTY_REMARK,

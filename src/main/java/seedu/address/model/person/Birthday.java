@@ -22,7 +22,7 @@ public class Birthday {
     }
 
     public Birthday(String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         this.date = LocalDate.parse(date, formatter);
     }
 
@@ -40,12 +40,13 @@ public class Birthday {
         Period period = Period.between(birthday, today);
         int age = period.getYears();
 
-        return age >= MINIMUM_AGE && age < MAXIMUM_AGE;
+        return (age >= MINIMUM_AGE) && (age < MAXIMUM_AGE);
     }
 
     @Override
     public String toString() {
-        return date.toString();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return date.format(formatter);
     }
 
     @Override

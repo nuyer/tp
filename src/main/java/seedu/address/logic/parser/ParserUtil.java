@@ -253,7 +253,7 @@ public class ParserUtil {
         requireNonNull(birthday);
         LocalDate date;
         try {
-            date = LocalDate.parse(birthday, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            date = LocalDate.parse(birthday, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
             if (date == null) {
                 throw new ParseException(Birthday.MESSAGE_INVALID_DATE_FORMAT);
             }

@@ -68,6 +68,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label termsOfService;
     @FXML
+    private Label birthday;
+    @FXML
     private Label id;
 
     /**
@@ -109,6 +111,7 @@ public class PersonCard extends UiPart<Region> {
         products.setVisible(false);
         skills.setVisible(false);
         termsOfService.setVisible(false);
+        birthday.setVisible(false);
 
         preferences.setManaged(false);
         department.setManaged(false);
@@ -116,6 +119,7 @@ public class PersonCard extends UiPart<Region> {
         products.setManaged(false);
         skills.setManaged(false);
         termsOfService.setManaged(false);
+        birthday.setManaged(false);
 
         if (person instanceof Client) {
             Client client = (Client) person;
@@ -140,6 +144,9 @@ public class PersonCard extends UiPart<Region> {
             skills.setManaged(true);
             skills.setText("Skills: " + employee.getSkills().getSkills().stream()
                     .sorted().collect(Collectors.joining(", ")));
+            birthday.setVisible(true);
+            birthday.setManaged(true);
+            birthday.setText("Birthday: " + employee.getBirthday().toString());
         } else if (person instanceof Supplier) {
             Supplier supplier = (Supplier) person;
             role.getChildren().add(new Label("Supplier"));

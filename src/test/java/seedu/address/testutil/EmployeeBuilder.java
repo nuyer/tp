@@ -1,9 +1,6 @@
 package seedu.address.testutil;
 
-import seedu.address.model.person.Department;
-import seedu.address.model.person.Employee;
-import seedu.address.model.person.JobTitle;
-import seedu.address.model.person.Skills;
+import seedu.address.model.person.*;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -16,10 +13,12 @@ public class EmployeeBuilder extends PersonBuilder<EmployeeBuilder> {
     public static final String DEFAULT_DEPARTMENT = "IT";
     public static final String DEFAULT_JOB_TITLE = "Software Engineer";
     public static final String DEFAULT_SKILLS = "Java C++";
+    public static final String DEFAULT_BIRTHDAY = "11-12-2000";
 
     private Department department;
     private JobTitle jobTitle;
     private Skills skills;
+    private Birthday birthday;
 
     /**
      * Constructs a new EmployeeBuilder with default values.
@@ -29,6 +28,7 @@ public class EmployeeBuilder extends PersonBuilder<EmployeeBuilder> {
         department = new Department(DEFAULT_DEPARTMENT);
         jobTitle = new JobTitle(DEFAULT_JOB_TITLE);
         skills = new Skills(DEFAULT_SKILLS);
+        birthday = new Birthday(DEFAULT_BIRTHDAY);
     }
 
     /**
@@ -81,6 +81,6 @@ public class EmployeeBuilder extends PersonBuilder<EmployeeBuilder> {
      */
     @Override
     public Employee build() {
-        return new Employee(id, name, phone, email, address, remark, tags, department, jobTitle, skills);
+        return new Employee(id, name, phone, email, address, remark, tags, department, jobTitle, skills, birthday);
     }
 }

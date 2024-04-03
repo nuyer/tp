@@ -69,7 +69,8 @@ public class Messages {
         } else if (person instanceof Employee) {
             builder.append("; Department: ").append(((Employee) person).getDepartment())
                     .append("; Job Title: ").append(((Employee) person).getJobTitle())
-                    .append("; Skills: ").append(((Employee) person).getSkills());
+                    .append("; Skills: ").append(((Employee) person).getSkills())
+                    .append("; Birthday: ").append(((Employee) person).getBirthday());
         } else if (person instanceof Supplier) {
             builder.append("; Products: ").append(((Supplier) person).getProducts())
                     .append("; Terms of Service: ").append(((Supplier) person).getTermsOfService());

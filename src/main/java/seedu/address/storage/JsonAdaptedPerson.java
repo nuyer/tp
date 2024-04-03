@@ -120,7 +120,7 @@ class JsonAdaptedPerson {
             termsOfService = null;
             products = new JsonAdaptedProducts(new ArrayList<>());
             skills = new JsonAdaptedSkills(new HashSet<>());
-            birthday = null;
+            birthday = new JsonAdaptedBirthday(new Birthday());
         }
     }
 

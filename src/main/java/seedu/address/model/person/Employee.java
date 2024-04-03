@@ -16,7 +16,7 @@ public class Employee extends Person {
     private final Department department;
     private final JobTitle jobTitle;
     private Skills skills = new Skills(new HashSet<>());
-    private final Birthday birthday;
+    private Birthday birthday = new Birthday();
 
     /**
      * Every field must be present and not null.
@@ -96,7 +96,8 @@ public class Employee extends Person {
                 && super.equals(other)
                 && department.equals(((Employee) other).department)
                 && jobTitle.equals(((Employee) other).jobTitle)
-                && skills.equals(((Employee) other).skills));
+                && skills.equals(((Employee) other).skills))
+                && birthday.equals(((Employee) other).birthday);
     }
 
     /**
@@ -106,7 +107,7 @@ public class Employee extends Person {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), department, jobTitle, skills);
+        return Objects.hash(super.hashCode(), department, jobTitle, skills, birthday);
     }
 
     /**
@@ -127,6 +128,7 @@ public class Employee extends Person {
                 .add("department", department)
                 .add("jobTitle", jobTitle)
                 .add("skills", skills)
+                .add("birthday", birthday)
                 .toString();
     }
 }
