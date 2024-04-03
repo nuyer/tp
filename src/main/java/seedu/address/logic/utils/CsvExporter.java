@@ -60,7 +60,7 @@ public class CsvExporter {
     private List<String[]> createDataList() {
         List<String[]> dataList = new ArrayList<>();
         String[] fieldNames = {"ID", "Name", "Phone", "Email", "Address", "Remark", "Tags", "Department",
-            "Job Title", "Skills", "Products", "Preferences", "Terms of Service"};
+            "Job Title", "Skills", "Products", "Preferences", "Terms of Service",  "Birthday"};
         dataList.add(fieldNames);
 
         for (Person person : this.persons) {
@@ -78,7 +78,7 @@ public class CsvExporter {
      * @return A string array representing the data of the Person object.
      */
     public String[] convertPersonToStringArray(Person person) {
-        String[] personStringArray = new String[13];
+        String[] personStringArray = new String[14];
 
         personStringArray[0] = person.getId().toString();
         personStringArray[1] = person.getName().toString();
@@ -95,6 +95,7 @@ public class CsvExporter {
             personStringArray[10] = "";
             personStringArray[11] = "";
             personStringArray[12] = "";
+            personStringArray[13] = employee.getBirthday().toString();
         } else if (person instanceof Client) {
             Client client = (Client) person;
             personStringArray[7] = "";
@@ -103,6 +104,7 @@ public class CsvExporter {
             personStringArray[10] = client.getProducts().toString();
             personStringArray[11] = client.getPreferences();
             personStringArray[12] = "";
+            personStringArray[13] = "";
         } else if (person instanceof Supplier) {
             Supplier supplier = (Supplier) person;
             personStringArray[7] = "";
@@ -111,6 +113,7 @@ public class CsvExporter {
             personStringArray[10] = supplier.getProducts().toString();
             personStringArray[11] = "";
             personStringArray[12] = supplier.getTermsOfService().toString();
+            personStringArray[13] = "";
         }
 
         return personStringArray;

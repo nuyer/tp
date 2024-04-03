@@ -20,9 +20,6 @@ public class Birthday {
         return date;
     }
 
-    public String getDateString() {
-        return date.toString();
-    }
 
     public static boolean isValidBirthday(Date birthday) {
         if (birthday == null) {
