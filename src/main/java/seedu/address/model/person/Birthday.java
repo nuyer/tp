@@ -6,10 +6,10 @@ import java.time.format.DateTimeFormatter;
 
 public class Birthday {
 
-    public static final String MESSAGE_INVALID_DATE_FORMAT = "Skills should only contain alphanumeric characters and spaces";
-    public static final String MESSAGE_INVALID_DATE = "Skills should only contain alphanumeric characters and spaces";
+    public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format. Date should be in the format dd-MM-yyyy.";
+    public static final String MESSAGE_INVALID_DATE = "Employee must be at least " + Birthday.MAXIMUM_AGE + " years old and less than " + Birthday.MAXIMUM_AGE + " years old.";
     private static final int MINIMUM_AGE = 10;
-    private static final int MAXIMUM_AGE = 10;
+    private static final int MAXIMUM_AGE = 100;
 
     private final LocalDate date;
 
@@ -40,7 +40,7 @@ public class Birthday {
         Period period = Period.between(birthday, today);
         int age = period.getYears();
 
-        return (age >= MINIMUM_AGE) && (age < MAXIMUM_AGE);
+        return (age >= MINIMUM_AGE) && (age <= MAXIMUM_AGE);
     }
 
     @Override

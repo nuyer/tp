@@ -92,8 +92,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             JobTitle jobTitle = optionalJobTitle.isPresent() ? optionalJobTitle.map(JobTitle::new).get()
                     : new JobTitle("-");
             Skills skills = ParserUtil.parseSkills(optionalSkills.orElse(Collections.emptyList()));
-            Birthday birthday = optionalBirthday.isPresent() ? optionalBirthday.map(Birthday::new).get()
-                    : new Birthday();
+            Birthday birthday = ParserUtil.parseBirthday(optionalBirthday.orElse(null));
             person = new Employee(name, phone, email, address, remark, tagList, department, jobTitle, skills, birthday);
             break;
         case "supplier":

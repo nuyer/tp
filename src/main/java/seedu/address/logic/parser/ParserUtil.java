@@ -260,6 +260,7 @@ public class ParserUtil {
         } catch (DateTimeParseException e) {
             throw new ParseException(Birthday.MESSAGE_INVALID_DATE_FORMAT);
         }
+
         if (!Birthday.isValidBirthday(date)) {
             throw new ParseException(Birthday.MESSAGE_INVALID_DATE);
         }
