@@ -1,7 +1,7 @@
 package seedu.address.model.person;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.Period;
 
 public class Birthday {
 
@@ -10,35 +10,29 @@ public class Birthday {
     private static final int MINIMUM_AGE = 10;
     private static final int MAXIMUM_AGE = 10;
 
-    private final Date date;
+    private final LocalDate date;
 
     public Birthday() {
         this.date = null;
     }
 
-    public Birthday(Date date) {
+    public Birthday(LocalDate date) {
         this.date = date;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
 
-    public static boolean isValidBirthday(Date birthday) {
+    public static boolean isValidBirthday(LocalDate birthday) {
         if (birthday == null) {
             return false;
         }
 
-        Calendar dob = Calendar.getInstance();
-        dob.setTime(birthday);
-        Calendar today = Calendar.getInstance();
-
-        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
-        if (today.get(Calendar.MONTH) < dob.get(Calendar.MONTH) ||
-                (today.get(Calendar.MONTH) == dob.get(Calendar.MONTH) && today.get(Calendar.DAY_OF_MONTH) < dob.get(Calendar.DAY_OF_MONTH))) {
-            age--;
-        }
+        LocalDate today = LocalDate.now();
+        Period period = Period.between(birthday, today);
+        int age = period.getYears();
 
         return age >= MINIMUM_AGE && age < MAXIMUM_AGE;
     }

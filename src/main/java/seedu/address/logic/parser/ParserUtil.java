@@ -2,7 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import java.util.*;
 
 import seedu.address.commons.core.index.Index;
@@ -248,14 +251,13 @@ public class ParserUtil {
 
     public static Birthday parseBirthday(String birthday) throws ParseException {
         requireNonNull(birthday);
-        Date date;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        LocalDate date;
         try {
-            date = dateFormat.parse(birthday);
+            date = LocalDate.parse(birthday, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             if (date == null) {
                 throw new ParseException(Birthday.MESSAGE_INVALID_DATE_FORMAT);
             }
-        } catch (java.text.ParseException e) {
+        } catch (DateTimeParseException e) {
             throw new ParseException(Birthday.MESSAGE_INVALID_DATE_FORMAT);
         }
         if (!Birthday.isValidBirthday(date)) {
