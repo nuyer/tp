@@ -47,6 +47,7 @@ public class ModelManager implements Model {
         // not ReadOnly as relatedIdList is mutable and recorded in .txt format
         this.relatedIdList = relatedIdList;
         filteredPersons = new FilteredList<>(this.netConnect.getPersonList());
+        this.checkBirthdayAndRemind();
     }
 
     public ModelManager() {
@@ -205,6 +206,10 @@ public class ModelManager implements Model {
     @Override
     public String printFilters() {
         return filter.formatFilter();
+    }
+
+    public void checkBirthdayAndRemind() {
+        netConnect.checkBirthdayAndRemind();
     }
 
     @Override

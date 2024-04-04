@@ -138,4 +138,6 @@ public interface Model {
     void addRelatedIdTuple(IdTuple idTuple);
 
     RelatedList getRelatedIdTuples();
+
+    void checkBirthdayAndRemind();
 }

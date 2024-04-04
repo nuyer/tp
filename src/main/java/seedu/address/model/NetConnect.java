@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.utils.BirthdayReminder;
 import seedu.address.logic.utils.CsvExporter;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
@@ -89,8 +90,7 @@ public class NetConnect implements ReadOnlyNetConnect {
     }
 
     /**
-     * Returns true if the NetConnect has exactly one {@code Person}
-     * with the specified name.
+     * Counts the number of persons in NetConnect with the specified name.
      */
     public int countPersonsWithName(Name name) {
         requireNonNull(name);
@@ -145,6 +145,13 @@ public class NetConnect implements ReadOnlyNetConnect {
         CsvExporter exporter = new CsvExporter(persons, filename);
         exporter.execute();
         return exporter.getIsSuccessful();
+    }
+
+    public void checkBirthdayAndRemind(){
+        System.out.println("herhehrree4");
+        BirthdayReminder birthdayReminder = new BirthdayReminder(this.persons);
+        System.out.println("herhehrree5");
+        birthdayReminder.checkBirthdayAndRemind();
     }
 
     //// util methods
