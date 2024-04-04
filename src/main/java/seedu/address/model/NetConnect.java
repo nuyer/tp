@@ -156,7 +156,7 @@ public class NetConnect implements ReadOnlyNetConnect {
         exporter.execute();
         return exporter.getIsSuccessful();
     }
-    
+
     /**
      * The function `checkBirthdayAndRemind` creates a `BirthdayReminder` object and calls its
      * `checkBirthdayAndRemind` method.
@@ -164,6 +164,7 @@ public class NetConnect implements ReadOnlyNetConnect {
     public void checkBirthdayAndRemind() {
         BirthdayReminder birthdayReminder = new BirthdayReminder(this.persons);
         birthdayReminder.checkBirthdayAndRemind();
+    }
 
     /**
      * Returns true if the specified IdTuple is present in the relatedList, false otherwise.
