@@ -8,12 +8,11 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyNetConnect;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.util.RelatedList;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends NetConnectStorage, UserPrefsStorage {
+public interface Storage extends NetConnectStorage, UserPrefsStorage, StateStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
@@ -30,8 +29,12 @@ public interface Storage extends NetConnectStorage, UserPrefsStorage {
     @Override
     void saveNetConnect(ReadOnlyNetConnect netConnect) throws IOException;
 
-    void saveRelate(RelatedList relatedList);
+    @Override
+    String readState() throws DataLoadingException;
 
-    RelatedList readRelate() throws DataLoadingException;
+    @Override
+    void saveState(String input) throws IOException;
 
+    @Override
+    Path getStateStorageFilePath();
 }

@@ -10,7 +10,6 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyNetConnect;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.util.RelatedList;
 
 /**
  * Manages storage of NetConnect data in local storage.
@@ -20,18 +19,17 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private final NetConnectStorage netConnectStorage;
     private final UserPrefsStorage userPrefsStorage;
-    private final RelateStorage relateStorage;
+    private final StateStorage stateStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code NetConnectStorage} and
      * {@code UserPrefStorage}.
      */
     public StorageManager(NetConnectStorage netConnectStorage,
-                          UserPrefsStorage userPrefsStorage,
-                          RelateStorage relateStorage) {
+                          UserPrefsStorage userPrefsStorage, StateStorage stateStorage) {
         this.netConnectStorage = netConnectStorage;
         this.userPrefsStorage = userPrefsStorage;
-        this.relateStorage = relateStorage;
+        this.stateStorage = stateStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -80,15 +78,22 @@ public class StorageManager implements Storage {
         netConnectStorage.saveNetConnect(netConnect, filePath);
     }
 
-    // ================ Relate methods ==============================
+    // ================ StateStorage methods ==============================
+
     @Override
-    public void saveRelate(RelatedList relatedList) {
-        relateStorage.writeRelate(relatedList);
+    public void saveState(String input) throws IOException {
+        logger.fine("Attempting to write to data file: " + getStateStorageFilePath());
+        stateStorage.saveState(input);
     }
 
     @Override
-    public RelatedList readRelate() throws DataLoadingException {
-        return relateStorage.loadRelate();
+    public String readState() throws DataLoadingException {
+        logger.fine("Attempting to read data from file: " + stateStorage.getStateStorageFilePath());
+        return stateStorage.readState();
     }
 
+    @Override
+    public Path getStateStorageFilePath() {
+        return stateStorage.getStateStorageFilePath();
+    }
 }
