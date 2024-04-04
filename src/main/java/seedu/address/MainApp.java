@@ -21,14 +21,14 @@ import seedu.address.model.NetConnect;
 import seedu.address.model.ReadOnlyNetConnect;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.util.RelatedList;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.JsonNetConnectStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.NetConnectStorage;
-import seedu.address.storage.RelateStorage;
+import seedu.address.storage.StateStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
+import seedu.address.storage.TextStateStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
@@ -60,12 +60,10 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         NetConnectStorage netConnectStorage = new JsonNetConnectStorage(userPrefs.getNetConnectFilePath());
-        RelateStorage relateStorage = new RelateStorage();
-        RelatedList relatedList = initRelations(relateStorage);
+        StateStorage stateStorage = new TextStateStorage();
+        storage = new StorageManager(netConnectStorage, userPrefsStorage, stateStorage);
 
-        storage = new StorageManager(netConnectStorage, userPrefsStorage, relateStorage);
-
-        model = initModelManager(storage, userPrefs, relatedList);
+        model = initModelManager(storage, userPrefs);
 
         logic = new LogicManager(model, storage);
 
@@ -80,7 +78,7 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading
      * {@code storage}'s address book.
      */
-    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs, RelatedList relatedList) {
+    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getNetConnectFilePath());
 
         Optional<ReadOnlyNetConnect> netConnectOptional;
@@ -98,7 +96,7 @@ public class MainApp extends Application {
             initialData = new NetConnect();
         }
 
-        return new ModelManager(initialData, userPrefs, relatedList);
+        return new ModelManager(initialData, userPrefs);
     }
 
     private void initLogging(Config config) {
@@ -143,23 +141,6 @@ public class MainApp extends Application {
             logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
         return initializedConfig;
-    }
-
-    /**
-     * Returns a {@code RelatedList} using the file at {@code storage}'s related list
-     * file path,
-     * or a new {@code RelatedList} with default configuration if errors occur when
-     * reading from the file.
-     */
-    protected RelatedList initRelations(RelateStorage storage) {
-        RelatedList initializedRelations;
-        try {
-            initializedRelations = storage.loadRelate();
-        } catch (DataLoadingException e) {
-            logger.warning("Relations file could not be loaded. Using default relations.");
-            initializedRelations = new RelatedList();
-        }
-        return initializedRelations;
     }
 
     /**

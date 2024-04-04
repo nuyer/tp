@@ -234,6 +234,11 @@ public class AddCommandTest {
         public void checkBirthdayAndRemind() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean removeRelatedIdTuple(IdTuple idTuple) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
