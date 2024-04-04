@@ -46,7 +46,7 @@ public class CsvExporterTest {
         List<Person> persons = Arrays.asList(
                 new EmployeeBuilder().withId(1).withName("John Doe").withPhone("1234567890")
                         .withEmail("john@example.com").withAddress("123 Main St").withDepartment("HR")
-                        .withJobTitle("Manager").withSkills("Java, SQL").build(),
+                        .withJobTitle("Manager").withSkills("Java, SQL").withBirthday("12-02-1999").build(),
                 new ClientBuilder().withId(2).withName("Jane Smith").withPhone("9876543210")
                         .withEmail("jane@example.com")
                         .withAddress("456 Elm St").withProducts("Product A").withPreferences("Likes discounts")
@@ -63,14 +63,14 @@ public class CsvExporterTest {
         assertTrue(dataList.size() == 4);
 
         assertArrayEquals(new String[]{"ID", "Name", "Phone", "Email", "Address", "Remark", "Tags", "Department",
-            "Job Title", "Skills", "Products", "Preferences", "Terms of Service"}, dataList.get(0));
+            "Job Title", "Skills", "Products", "Preferences", "Terms of Service", "Birthday"}, dataList.get(0));
 
         assertArrayEquals(new String[]{"1", "John Doe", "1234567890", "john@example.com", "\"123 Main St\"",
-            "some remarks", "", "HR", "Manager", "Java, SQL", "", "", ""}, dataList.get(1));
+            "some remarks", "", "HR", "Manager", "Java, SQL", "", "", "", "12-02-1999"}, dataList.get(1));
         assertArrayEquals(new String[]{"2", "Jane Smith", "9876543210", "jane@example.com", "\"456 Elm St\"",
-            "some remarks", "", "", "", "", "Product A", "Likes discounts", ""}, dataList.get(2));
+            "some remarks", "", "", "", "", "Product A", "Likes discounts", "", ""}, dataList.get(2));
         assertArrayEquals(new String[]{"3", "Acme Inc", "5555555555", "info@acme.com", "\"789 Oak St\"",
-            "some remarks", "", "", "", "", "Product X", "", "30 days"}, dataList.get(3));
+            "some remarks", "", "", "", "", "Product X", "", "30 days", ""}, dataList.get(3));
     }
 
     @Test
@@ -129,7 +129,7 @@ public class CsvExporterTest {
     public void convertPersonToStringArray_employee() {
         String[] expectedArray = new String[]{
             "3", "Daniel Meier", "87652533", "cornelia@example.com", "\"10th street\"", "some remarks",
-            "\"friends\"", "Marketing", "Manager", "Digital Marketing, Public Speaking", "", "", ""
+            "\"friends\"", "Marketing", "Manager", "Digital Marketing, Public Speaking", "", "", "", ""
         };
         assertArrayEquals(expectedArray, csvExporter.convertPersonToStringArray(TypicalPersons.DANIEL));
     }
@@ -138,7 +138,7 @@ public class CsvExporterTest {
     public void convertPersonToStringArray_client() {
         String[] expectedArray = new String[]{
             "1", "Alice Pauline", "94351253", "alice@example.com", "\"123, Jurong West Ave 6, #08-111\"",
-            "some remarks", "\"friends\"", "", "", "", "Product1, Product2", "Vegan", ""
+            "some remarks", "\"friends\"", "", "", "", "Product1, Product2", "Vegan", "", ""
         };
         assertArrayEquals(expectedArray, csvExporter.convertPersonToStringArray(TypicalPersons.ALICE));
     }
@@ -147,7 +147,7 @@ public class CsvExporterTest {
     public void convertPersonToStringArray_supplier() {
         String[] expectedArray = new String[]{
             "5", "Fiona Kunz", "9482427", "lydia@example.com", "\"little tokyo\"", "some remarks", "", "", "",
-            "", "Office Supplies, Furniture", "", "Delivery within 2 weeks"
+            "", "Office Supplies, Furniture", "", "Delivery within 2 weeks", ""
         };
         assertArrayEquals(expectedArray, csvExporter.convertPersonToStringArray(TypicalPersons.FIONA));
     }
