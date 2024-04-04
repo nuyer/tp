@@ -9,13 +9,22 @@ import seedu.address.model.person.Employee;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
+/**
+ * The `BirthdayReminder` class checks for employees whose birthday is today and generates a reminder text to
+ * wish them a happy birthday.
+ */
 public class BirthdayReminder {
 
     private final UniquePersonList persons;
 
-    public BirthdayReminder (UniquePersonList persons) {
+    public BirthdayReminder(UniquePersonList persons) {
         this.persons = persons;
     }
+
+    /**
+     * The function `checkBirthdayAndRemind` retrieves a list of names of people with upcoming birthdays, builds
+     * a reminder text, and connects to the UI to display the reminder.
+     */
     public void checkBirthdayAndRemind() {
         List<String> birthdayPeopleNames = getBirthdayPeopleNames();
         if (!birthdayPeopleNames.isEmpty()) {
@@ -24,6 +33,12 @@ public class BirthdayReminder {
         }
     }
 
+    /**
+     * The function `getBirthdayPeopleNames` retrieves the names of employees whose birthday is today from a list
+     * of persons.
+     *
+     * @return A list of string arrays representing People's Name whose birthday is today
+     */
     private List<String> getBirthdayPeopleNames() {
         List<String> birthdayPeopleNames = new ArrayList<>();
         for (Person person : persons) {
@@ -38,6 +53,13 @@ public class BirthdayReminder {
         return birthdayPeopleNames;
     }
 
+    /**
+     * The function `isBirthdayToday` checks if the given `Birthday` object falls on the current date.
+     *
+     * @param birthday ```java
+     * @return The method is returning a boolean value indicating whether the provided birthday object represents
+     *     today's date.
+     */
     private boolean isBirthdayToday(Birthday birthday) {
         LocalDate today = LocalDate.now();
         int birthdayMonth = birthday.getDate().getMonthValue();
@@ -48,6 +70,14 @@ public class BirthdayReminder {
         return (birthdayMonth == currentMonth) && (birthdayDayOfMonth == currentDayOfMonth);
     }
 
+    /**
+     * The function builds a reminder text for wishing happy birthday to people whose names are provided in a
+     *     list.
+     *
+     * @param birthdayPeopleNames List of String birthdayPeopleNames
+     * @return The method `buildReminderText` returns a String that contains a reminder text for today's
+     *     birthdays, including the names of the people whose birthdays are today.
+     */
     private String buildReminderText(List<String> birthdayPeopleNames) {
         StringBuilder reminderText = new StringBuilder();
         reminderText.append("Today's someone's birthday!\n");

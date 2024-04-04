@@ -147,10 +147,12 @@ public class NetConnect implements ReadOnlyNetConnect {
         return exporter.getIsSuccessful();
     }
 
-    public void checkBirthdayAndRemind(){
-        System.out.println("herhehrree4");
+    /**
+     * The function `checkBirthdayAndRemind` creates a `BirthdayReminder` object and calls its
+     * `checkBirthdayAndRemind` method.
+     */
+    public void checkBirthdayAndRemind() {
         BirthdayReminder birthdayReminder = new BirthdayReminder(this.persons);
-        System.out.println("herhehrree5");
         birthdayReminder.checkBirthdayAndRemind();
     }
 
