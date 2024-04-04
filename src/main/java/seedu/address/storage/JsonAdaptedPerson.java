@@ -84,7 +84,7 @@ class JsonAdaptedPerson {
         this.jobTitle = jobTitle == null ? new JobTitle() : jobTitle;
         this.termsOfService = termsOfService == null ? new TermsOfService() : termsOfService;
         this.skills = skills == null ? new JsonAdaptedSkills(new HashSet<>()) : skills;
-        this.birthday = birthday  == null ? new JsonAdaptedBirthday(new Birthday()) : birthday;
+        this.birthday = birthday == null ? new JsonAdaptedBirthday(new Birthday()) : birthday;
     }
 
     /**

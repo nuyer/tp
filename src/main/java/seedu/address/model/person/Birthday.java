@@ -27,16 +27,36 @@ public class Birthday {
         this.date = date;
     }
 
+    /**
+     * Constructs a {@code Birthday} object with the given date represented as a {@code String}.
+     * The date should be in the format "dd-MM-yyyy".
+     *
+     * @param date A {@code String} representing the date in the format "dd-MM-yyyy".
+     */
     public Birthday(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         this.date = LocalDate.parse(date, formatter);
     }
 
+    /**
+     * The function `getDate` returns a `LocalDate` object.
+     *
+     * @return A `LocalDate` object is being returned.
+     */
     public LocalDate getDate() {
         return date;
     }
 
-
+    /**
+     * The function `isValidBirthday` checks if a given `LocalDate` represents a valid birthday within a
+     *     specified age range.
+     *
+     * @param birthday The `isValidBirthday` method is used to check if a given `LocalDate` object represents a
+     *     valid birthday within a specified age range. The method calculates the age based on the difference between
+     *     the provided birthday and the current date, and then checks if the age falls within the defined `MINIMUM_A
+     * @return The method `isValidBirthday` returns a boolean value indicating whether the provided birthday is
+     *     valid based on the minimum and maximum age constraints.
+     */
     public static boolean isValidBirthday(LocalDate birthday) {
         if (birthday == null) {
             return false;

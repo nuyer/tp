@@ -59,8 +59,8 @@ public class CsvExporter {
      */
     private List<String[]> createDataList() {
         List<String[]> dataList = new ArrayList<>();
-        String[] fieldNames = {"ID", "Name", "Phone", "Email", "Address", "Remark", "Tags", "Department"
-                , "Job Title", "Skills", "Products", "Preferences", "Terms of Service",  "Birthday"};
+        String[] fieldNames = {"ID", "Name", "Phone", "Email", "Address", "Remark", "Tags", "Department",
+            "Job Title", "Skills", "Products", "Preferences", "Terms of Service", "Birthday"};
         dataList.add(fieldNames);
 
         for (Person person : this.persons) {

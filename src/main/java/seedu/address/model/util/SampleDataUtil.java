@@ -7,7 +7,21 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.NetConnect;
 import seedu.address.model.ReadOnlyNetConnect;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
+import seedu.address.model.person.Client;
+import seedu.address.model.person.Department;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Employee;
+import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Products;
+import seedu.address.model.person.Remark;
+import seedu.address.model.person.Skills;
+import seedu.address.model.person.Supplier;
+import seedu.address.model.person.TermsOfService;
 import seedu.address.model.tag.Tag;
 
 /**

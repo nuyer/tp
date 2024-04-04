@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -263,6 +262,15 @@ public class ParserUtil {
         return new TermsOfService(termsOfService);
     }
 
+    /**
+     * The function `parseBirthday` takes a string representing a birthday, parses it into a `LocalDate` object,
+     *     validates the date, and returns a `Birthday` object.
+     *
+     * @param birthday The `parseBirthday` method takes a String `birthday` as input, which represents a date in
+     *     the format "dd-MM-yyyy". The method parses this String into a `LocalDate` object using a
+     *     `DateTimeFormatter` with the specified pattern. If the parsing is successful, it checks if the
+     * @return An instance of the `Birthday` class is being returned.
+     */
     public static Birthday parseBirthday(String birthday) throws ParseException {
         requireNonNull(birthday);
         LocalDate date;
