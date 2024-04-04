@@ -71,7 +71,8 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getSkills().orElse(null) + ", products="
                 + editPersonDescriptor.getProducts().orElse(null) + ", termsOfService="
                 + editPersonDescriptor.getTermsOfService().orElse(null) + ", preferences="
-                + editPersonDescriptor.getPreferences().orElse(null) + "}";
+                + editPersonDescriptor.getPreferences().orElse(null) + ", birthday="
+                + editPersonDescriptor.getBirthday().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

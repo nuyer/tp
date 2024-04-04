@@ -11,7 +11,13 @@ import java.util.Collections;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Id;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Products;
 import seedu.address.model.tag.Tag;
 
 public class JsonAdaptedPersonTest {
@@ -33,7 +39,7 @@ public class JsonAdaptedPersonTest {
     private static final JsonAdaptedProducts VALID_PRODUCTS =
             new JsonAdaptedProducts(new Products(Arrays.asList("Coffee", "Cake")));
     private static final String VALID_PREFERENCES = "Cafe";
-    private static final JsonAdaptedBirthday VALID_BIRTHDAY = new JsonAdaptedBirthday(new Birthday("14/02/1995"));
+    private static final JsonAdaptedBirthday VALID_BIRTHDAY = new JsonAdaptedBirthday(new Birthday("14-02-1995"));
     private static final String VALID_REMARK = "Loves coffee";
 
     @Test

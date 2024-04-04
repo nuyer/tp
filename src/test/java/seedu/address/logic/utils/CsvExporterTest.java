@@ -66,6 +66,7 @@ public class CsvExporterTest {
             "",
             person.getProducts().toString(),
             person.getPreferences().toString(),
+            "",
             ""
         };
         assertArrayEquals(expectedArray, csvExporter.convertPersonToStringArray(person));

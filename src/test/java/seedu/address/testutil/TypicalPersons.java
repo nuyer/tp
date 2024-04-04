@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDAY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -51,11 +52,12 @@ public class TypicalPersons {
     public static final Employee DANIEL = new EmployeeBuilder().withId(3).withName("Daniel Meier")
             .withPhone("87652533").withEmail("cornelia@example.com").withAddress("10th street")
             .withTags("friends").withDepartment("Marketing").withJobTitle("Manager")
-            .withSkills("Public Speaking", "Digital Marketing").build();
+            .withSkills("Public Speaking", "Digital Marketing").withBirthday("22-10-1999").build();
 
     public static final Employee ELLE = new EmployeeBuilder().withId(4).withName("Elle Meyer")
             .withPhone("9482224").withEmail("werner@example.com").withAddress("michegan ave")
-            .withDepartment("IT").withJobTitle("Developer").withSkills("Java", "C++").build();
+            .withDepartment("IT").withJobTitle("Developer").withSkills("Java", "C++").withBirthday("20-04-2002")
+            .build();
 
     public static final Supplier FIONA = new SupplierBuilder().withId(5).withName("Fiona Kunz")
             .withPhone("9482427").withEmail("lydia@example.com").withAddress("little tokyo")
@@ -69,7 +71,7 @@ public class TypicalPersons {
     public static final Employee HOON = new EmployeeBuilder().withId(9).withName("Hoon Meier").withPhone("8482424")
             .withEmail("stefan@example.com").withAddress("little india")
             .withDepartment("Tech Support").withJobTitle("Technician")
-            .withSkills("Technical Support", "Customer Service").build();
+            .withSkills("Technical Support", "Customer Service").withBirthday("22-10-1999").build();
 
     public static final Supplier IDA = new SupplierBuilder().withId(10).withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave")
@@ -86,7 +88,7 @@ public class TypicalPersons {
             .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withRemark(VALID_REMARK_BOB)
             .withDepartment(VALID_DEPARTMENT_BOB).withJobTitle(VALID_JOB_TITLE_BOB)
-            .withSkills(VALID_SKILLS_NEGOTIATION, VALID_SKILLS_COMMUNICATION).build();
+            .withSkills(VALID_SKILLS_NEGOTIATION, VALID_SKILLS_COMMUNICATION).withBirthday(VALID_BIRTHDAY_BOB).build();
 
     private TypicalPersons() {} // prevents instantiation
 

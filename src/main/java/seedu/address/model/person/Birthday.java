@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an Employee's birthday in the address book.
+ * Guarantees: immutable; is valid as declared in
+ */
 public class Birthday {
 
     public static final String MESSAGE_INVALID_DATE_FORMAT =
@@ -47,6 +51,9 @@ public class Birthday {
 
     @Override
     public String toString() {
+        if (date == null) {
+            return "";
+        }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return date.format(formatter);
     }

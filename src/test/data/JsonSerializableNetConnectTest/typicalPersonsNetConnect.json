@@ -15,6 +15,9 @@
       "jobTitle": null,
       "termsOfService": null,
       "skills": {"skills": []},
+      "birthday" : {
+        "birthday" : null
+      },
       "remark": "some remarks"
     },
     {
@@ -31,6 +34,9 @@
       "jobTitle": null,
       "termsOfService": null,
       "skills": {"skills": []},
+      "birthday" : {
+        "birthday" : null
+      },
       "remark": "some remarks"
     },
     {
@@ -47,6 +53,9 @@
       "jobTitle": {"title": "Manager"},
       "termsOfService": null,
       "skills": {"skills": ["Digital Marketing", "Public Speaking"]},
+      "birthday" : {
+        "birthday" :"22-10-1999"
+      },
       "remark": "some remarks"
     },
     {
@@ -63,6 +72,9 @@
       "jobTitle": {"title": "Developer"},
       "termsOfService": null,
       "skills": {"skills": ["Java", "C++"]},
+      "birthday" : {
+        "birthday" : "20-04-2002"
+      },
       "remark": "some remarks"
     },
     {
@@ -79,6 +91,9 @@
       "jobTitle": null,
       "termsOfService": {"terms": "Delivery within 2 weeks"},
       "skills": {"skills": []},
+      "birthday" : {
+        "birthday" : null
+      },
       "remark": "some remarks"
     },
     {
@@ -95,6 +110,9 @@
       "jobTitle": null,
       "termsOfService": {"terms": "Warranty for 1 year"},
       "skills": {"skills": []},
+      "birthday" : {
+        "birthday" : null
+      },
       "remark": "some remarks"
     },
     {
@@ -111,6 +129,9 @@
       "jobTitle": null,
       "termsOfService": null,
       "skills": {"skills": []},
+      "birthday" : {
+        "birthday" : null
+      },
       "remark": "Like skiing."
     },
     {
@@ -140,6 +161,9 @@
           "Negotiation",
           "Communication"
         ]
+      },
+      "birthday" : {
+        "birthday" : "07-04-1995"
       },
       "remark": "Favourite pastime: Eating"
     }

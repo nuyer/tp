@@ -1,6 +1,10 @@
 package seedu.address.testutil;
 
-import seedu.address.model.person.*;
+import seedu.address.model.person.Birthday;
+import seedu.address.model.person.Department;
+import seedu.address.model.person.Employee;
+import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.Skills;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -39,6 +43,7 @@ public class EmployeeBuilder extends PersonBuilder<EmployeeBuilder> {
         department = employee.getDepartment();
         jobTitle = employee.getJobTitle();
         skills = employee.getSkills();
+        birthday = employee.getBirthday();
     }
 
     /**
@@ -71,6 +76,17 @@ public class EmployeeBuilder extends PersonBuilder<EmployeeBuilder> {
      */
     public EmployeeBuilder withSkills(String... skills) {
         this.skills = SampleDataUtil.getSkills(skills);
+        return this;
+    }
+
+    /**
+     * Sets the birthday of the employee that we are building.
+     *
+     * @param birthday The skills of the employee.
+     * @return The EmployeeBuilder with the skills set to {@code skills}.
+     */
+    public EmployeeBuilder withBirthday(String birthday) {
+        this.birthday = new Birthday(birthday);
         return this;
     }
 

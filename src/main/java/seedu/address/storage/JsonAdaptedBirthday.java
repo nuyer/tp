@@ -3,6 +3,9 @@ package seedu.address.storage;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Birthday;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Jackson-friendly version of {@link Birthday}.
  */
@@ -17,14 +20,13 @@ public class JsonAdaptedBirthday {
         this.birthday = "";
     }
 
-    public JsonAdaptedBirthday(Birthday birthday) {
-        this.birthday = birthday.toString();
-    }
-
     public JsonAdaptedBirthday(String birthday) {
         this.birthday = birthday;
     }
 
+    public JsonAdaptedBirthday(Birthday birthday) {
+        this.birthday = birthday.toString();
+    }
 
     public String getBirthday() {
         return birthday;
@@ -36,6 +38,8 @@ public class JsonAdaptedBirthday {
      * @throws IllegalValueException if there were any data constraints violated in the adapted birthday.
      */
     public Birthday toModelType() throws IllegalValueException {
-        return new Birthday(birthday);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate parsedDate = LocalDate.parse(birthday, formatter);
+        return new Birthday(parsedDate);
     }
 }

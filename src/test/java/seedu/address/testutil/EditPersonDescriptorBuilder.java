@@ -59,6 +59,7 @@ public class EditPersonDescriptorBuilder {
             descriptor.setDepartment(((Employee) person).getDepartment());
             descriptor.setJobTitle(((Employee) person).getJobTitle());
             descriptor.setSkills(((Employee) person).getSkills());
+            descriptor.setBirthday(((Employee) person).getBirthday());
         }
     }
 

@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.BIRTHDAY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.DEPARTMENT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
@@ -67,7 +68,8 @@ public class AddCommandParserTest {
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + ROLE_DESC_EMPLOYEE + DEPARTMENT_DESC_BOB
-                        + JOB_TITLE_DESC_BOB + SKILLS_DESC_NEGOTIATION + SKILLS_DESC_COMMUNICATION + REMARK_DESC_BOB,
+                        + JOB_TITLE_DESC_BOB + SKILLS_DESC_NEGOTIATION + SKILLS_DESC_COMMUNICATION + REMARK_DESC_BOB
+                        + BIRTHDAY_DESC_BOB,
                 new AddCommand(expectedPerson));
 
 
@@ -77,7 +79,8 @@ public class AddCommandParserTest {
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND
                         + TAG_DESC_FRIEND + ROLE_DESC_EMPLOYEE + DEPARTMENT_DESC_BOB + JOB_TITLE_DESC_BOB
-                        + SKILLS_DESC_NEGOTIATION + SKILLS_DESC_COMMUNICATION + REMARK_DESC_BOB,
+                        + SKILLS_DESC_NEGOTIATION + SKILLS_DESC_COMMUNICATION + REMARK_DESC_BOB
+                        + BIRTHDAY_DESC_BOB,
                 new AddCommand(expectedPersonMultipleTags));
     }
 
