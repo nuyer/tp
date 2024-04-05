@@ -129,7 +129,7 @@ public class CsvExporterTest {
     public void convertPersonToStringArray_employee() {
         String[] expectedArray = new String[]{
             "3", "Daniel Meier", "87652533", "cornelia@example.com", "\"10th street\"", "some remarks",
-            "\"friends\"", "Marketing", "Manager", "Digital Marketing, Public Speaking", "", "", "", ""
+            "\"friends\"", "Marketing", "Manager", "Digital Marketing, Public Speaking", "", "", "", "22-10-1999"
         };
         assertArrayEquals(expectedArray, csvExporter.convertPersonToStringArray(TypicalPersons.DANIEL));
     }

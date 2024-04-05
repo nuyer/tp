@@ -163,7 +163,7 @@ public class AddCommandParserTest {
         expectedPerson = new EmployeeBuilder(BOB).build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + ROLE_DESC_EMPLOYEE + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + REMARK_DESC_BOB + DEPARTMENT_DESC_BOB
-                + JOB_TITLE_DESC_BOB + SKILLS_DESC_NEGOTIATION + SKILLS_DESC_COMMUNICATION,
+                + JOB_TITLE_DESC_BOB + SKILLS_DESC_NEGOTIATION + SKILLS_DESC_COMMUNICATION + BIRTHDAY_DESC_BOB,
                 new AddCommand(expectedPerson));
     }
 
