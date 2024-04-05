@@ -122,8 +122,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                     : new JobTitle("-");
             Skills skills = ParserUtil.parseSkills(optionalSkills.orElse(Collections.emptyList()));
             Birthday birthday = ParserUtil.parseBirthday(optionalBirthday.orElse(null));
-            person = new Employee(name, phone, email, address, remark, tagList, department, jobTitle, skills, birthday);
-            return new Employee(name, phone, email, address, remark, tagList, department, jobTitle, skills);
+            return new Employee(name, phone, email, address, remark, tagList, department, jobTitle, skills, birthday);
         case "supplier":
             if (anyPrefixesPresent(
                     argMultimap, PREFIX_DEPARTMENT, PREFIX_JOBTITLE, PREFIX_SKILLS, PREFIX_PREFERENCES)) {
