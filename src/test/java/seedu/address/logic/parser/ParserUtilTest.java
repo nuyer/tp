@@ -1,10 +1,13 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIds.ID_FIRST_PERSON;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -16,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Department;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Id;
@@ -346,4 +350,30 @@ public class ParserUtilTest {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTermsOfService(null));
     }
 
+    @Test
+    public void parseBirthday_validDate_success() throws ParseException {
+        String validBirthdayString = "01-01-1990";
+        LocalDate validBirthday = LocalDate.parse(validBirthdayString, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        Birthday expectedBirthday = new Birthday(validBirthday);
+
+        try {
+            Birthday parsedBirthday = ParserUtil.parseBirthday(validBirthdayString);
+            assertFalse(!expectedBirthday.equals(parsedBirthday)); // Check if parsed birthday matches expected birthday
+        } catch (ParseException e) {
+            // ParseException not expected for valid input
+            throw new AssertionError("ParseException should not have been thrown for valid input");
+        }
+    }
+
+    @Test
+    public void parseBirthday_invalidDateFormat() {
+        String invalidBirthdayString = "01/01/1990";
+        assertThrows(ParseException.class, () -> ParserUtil.parseBirthday(invalidBirthdayString));
+    }
+
+    @Test
+    public void parseBirthday_invalidDate() {
+        String invalidBirthdayString = "01-32-1990";
+        assertThrows(ParseException.class, () -> ParserUtil.parseBirthday(invalidBirthdayString));
+    }
 }

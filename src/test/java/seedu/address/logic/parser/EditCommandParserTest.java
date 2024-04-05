@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -28,6 +27,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
@@ -52,6 +52,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Department;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Id;
@@ -247,7 +248,7 @@ public class EditCommandParserTest {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(" " + PREFIX_PREFERENCES + "pref1 pref2 "
                 + PREFIX_PRODUCTS + "product1 " + PREFIX_PRODUCTS + "product2 " + PREFIX_DEPARTMENT + "dept "
                 + PREFIX_JOBTITLE + "title " + PREFIX_SKILLS + "skill1 " + PREFIX_SKILLS + "skill2 "
-                + PREFIX_TERMSOFSERVICE + "terms");
+                + PREFIX_TERMSOFSERVICE + "terms" + PREFIX_BIRTHDAY + "11-12-2000");
 
         EditPersonDescriptor descriptor = new EditPersonDescriptor();
         descriptor.setPreferences(ParserUtil.parsePreferences("pref1 pref2"));
@@ -256,6 +257,7 @@ public class EditCommandParserTest {
         descriptor.setJobTitle(ParserUtil.parseJobTitle("title"));
         descriptor.setSkills(ParserUtil.parseSkills(Arrays.asList("skill1", "skill2")));
         descriptor.setTermsOfService(ParserUtil.parseTermsOfService("terms"));
+        descriptor.setBirthday(ParserUtil.parseBirthday("11-12-2000"));
 
         parser.parseOptionalFields(argMultimap, descriptor);
 
@@ -266,6 +268,7 @@ public class EditCommandParserTest {
         expectedDescriptor.setJobTitle(ParserUtil.parseJobTitle("title"));
         expectedDescriptor.setSkills(ParserUtil.parseSkills(Arrays.asList("skill1", "skill2")));
         expectedDescriptor.setTermsOfService(ParserUtil.parseTermsOfService("terms"));
+        expectedDescriptor.setBirthday(ParserUtil.parseBirthday("11-12-2000"));
 
         assertEquals(expectedDescriptor, descriptor);
 
@@ -281,17 +284,20 @@ public class EditCommandParserTest {
         assertEquals(expectedSkills, descriptor.getSkills().get());
 
         assertEquals(new TermsOfService("terms"), descriptor.getTermsOfService().get());
+        assertEquals(new Birthday("11-12-2000"), descriptor.getBirthday().get());
     }
 
     @Test
     public void parseOptionalFields_someFieldsPresent_success() throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(" " + PREFIX_PREFERENCES + "pref1 pref2 "
-                + PREFIX_DEPARTMENT + "dept " + PREFIX_SKILLS + "skill1 " + PREFIX_SKILLS + "skill2");
+                + PREFIX_DEPARTMENT + "dept " + PREFIX_SKILLS + "skill1 " + PREFIX_SKILLS + "skill2"
+                + PREFIX_BIRTHDAY + "11-12-2000");
 
         EditPersonDescriptor descriptor = new EditPersonDescriptor();
         descriptor.setPreferences(ParserUtil.parsePreferences("pref1 pref2"));
         descriptor.setDepartment(ParserUtil.parseDepartment("dept"));
         descriptor.setSkills(ParserUtil.parseSkills(Arrays.asList("skill1", "skill2")));
+        descriptor.setBirthday(ParserUtil.parseBirthday("11-12-2000"));
 
         parser.parseOptionalFields(argMultimap, descriptor);
 
@@ -299,6 +305,7 @@ public class EditCommandParserTest {
         expectedDescriptor.setPreferences(ParserUtil.parsePreferences("pref1 pref2"));
         expectedDescriptor.setDepartment(ParserUtil.parseDepartment("dept"));
         expectedDescriptor.setSkills(ParserUtil.parseSkills(Arrays.asList("skill1", "skill2")));
+        expectedDescriptor.setBirthday(ParserUtil.parseBirthday("11-12-2000"));
 
         assertEquals(expectedDescriptor, descriptor);
     }
@@ -308,18 +315,17 @@ public class EditCommandParserTest {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize("");
 
         EditPersonDescriptor descriptor = new EditPersonDescriptor();
-
         parser.parseOptionalFields(argMultimap, descriptor);
 
         EditPersonDescriptor expectedDescriptor = new EditPersonDescriptor();
 
         assertEquals(expectedDescriptor, descriptor);
-
         assertTrue(descriptor.getPreferences().isEmpty());
         assertTrue(descriptor.getProducts().isEmpty());
-        assertNull(descriptor.getDepartment().orElse(null));
-        assertNull(descriptor.getJobTitle().orElse(null));
+        assertTrue(descriptor.getDepartment().isEmpty());
+        assertTrue(descriptor.getJobTitle().isEmpty());
         assertTrue(descriptor.getSkills().isEmpty());
-        assertNull(descriptor.getTermsOfService().orElse(null));
+        assertTrue(descriptor.getTermsOfService().isEmpty());
+        assertTrue(descriptor.getBirthday().isEmpty());
     }
 }
