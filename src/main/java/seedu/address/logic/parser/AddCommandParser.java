@@ -22,6 +22,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
@@ -73,16 +74,44 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         String role = argMultimap.getValue(PREFIX_ROLE).get();
 
-        Person person;
+        return new AddCommand(
+                createPerson(role, name, phone, email, address, remark, tagList, argMultimap));
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns true if any of the prefixes are present in the given {@code ArgumentMultimap}.
+     */
+    private static boolean anyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    private static Person createPerson(
+            String role, Name name, Phone phone, Email email,
+            Address address, Remark remark, Set<Tag> tagList, ArgumentMultimap argMultimap)
+            throws ParseException {
         switch (role.toLowerCase()) {
         case "client":
+            if (anyPrefixesPresent(
+                    argMultimap, PREFIX_DEPARTMENT, PREFIX_JOBTITLE, PREFIX_SKILLS, PREFIX_TERMSOFSERVICE)) {
+                throw new ParseException(Messages.MESSAGE_INVALID_CLIENT_PROPERTY);
+            }
             Optional<String> optionalPreferences = argMultimap.getValue(PREFIX_PREFERENCES);
             Optional<List<String>> optionalProducts = Optional.ofNullable(argMultimap.getAllValues(PREFIX_PRODUCTS));
             String preferences = optionalPreferences.orElse("");
             Products products = ParserUtil.parseProducts(optionalProducts.orElse(Collections.emptyList()));
-            person = new Client(name, phone, email, address, remark, tagList, products, preferences);
-            break;
+            return new Client(name, phone, email, address, remark, tagList, products, preferences);
         case "employee":
+            if (anyPrefixesPresent(argMultimap, PREFIX_PRODUCTS, PREFIX_PREFERENCES, PREFIX_TERMSOFSERVICE)) {
+                throw new ParseException(Messages.MESSAGE_INVALID_EMPLOYEE_PROPERTY);
+            }
             Optional<String> optionalDepartment = argMultimap.getValue(PREFIX_DEPARTMENT);
             Optional<String> optionalJobTitle = argMultimap.getValue(PREFIX_JOBTITLE);
             Optional<List<String>> optionalSkills = Optional.ofNullable(argMultimap.getAllValues(PREFIX_SKILLS));
@@ -94,30 +123,24 @@ public class AddCommandParser implements Parser<AddCommand> {
             Skills skills = ParserUtil.parseSkills(optionalSkills.orElse(Collections.emptyList()));
             Birthday birthday = ParserUtil.parseBirthday(optionalBirthday.orElse(null));
             person = new Employee(name, phone, email, address, remark, tagList, department, jobTitle, skills, birthday);
-            break;
+            return new Employee(name, phone, email, address, remark, tagList, department, jobTitle, skills);
         case "supplier":
+            if (anyPrefixesPresent(
+                    argMultimap, PREFIX_DEPARTMENT, PREFIX_JOBTITLE, PREFIX_SKILLS, PREFIX_PREFERENCES)) {
+                throw new ParseException(Messages.MESSAGE_INVALID_SUPPLIER_PROPERTY);
+            }
             Optional<List<String>> optionalSupplierProducts = Optional.ofNullable(argMultimap
                     .getAllValues(PREFIX_PRODUCTS));
             Optional<String> optionalTermsOfService = argMultimap.getValue(PREFIX_TERMSOFSERVICE);
             Products supplierProducts = ParserUtil.parseProducts(optionalSupplierProducts
                     .orElse(Collections.emptyList()));
-            TermsOfService termsOfService = optionalTermsOfService.isPresent() ? optionalTermsOfService
-                    .map(TermsOfService::new).get()
-                    : new TermsOfService("-");
-            person = new Supplier(name, phone, email, address, remark, tagList, supplierProducts, termsOfService);
-            break;
+            TermsOfService termsOfService = optionalTermsOfService
+                    .map(TermsOfService::new)
+                    .orElseGet(() -> new TermsOfService("-"));
+            return new Supplier(name, phone, email, address, remark, tagList, supplierProducts, termsOfService);
         default:
-            throw new ParseException(Person.MESSAGE_ROLE_CONSTRAINTS);
+            throw new ParseException("Invalid role specified. Must be one of: client, employee, supplier.");
         }
-        return new AddCommand(person);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
 }
