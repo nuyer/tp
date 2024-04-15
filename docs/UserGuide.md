@@ -16,27 +16,30 @@ If you relate to this problem we identified, then NetConnect might be just right
 <div style="page-break-after: always;"></div>
 
 # Table of Contents
-* [Quick start](#quick-start)
-* [Features](#features)
-    + [Viewing help : `help`](#help)
-    + [Adding a person: `add` ](#add)
-    + [Deleting a person : `delete`](#delete)
-    + [Listing all persons : `list`](#list)
-    + [Editing a person : `edit`](#edit)
-    + [Locating persons by name: `find`](#find)
-    + [Clearing all entries : `clear`](#clear)
-    + [Create Relations between Profiles : `relate`](#relate)
-    + [Remove Relations between Profiles : `unrelate`](#remove-relations-between-profiles--unrelate)
-    + [Show Relations Associated to a Person : `showrelated`](#showrelated)
-    + [Open on Last State](#open-on-last-state)
-    + [Export Current View to CSV File : `export`](#export)
-    + [Never Miss a Birthday!](#birthday)
-    + [Exiting the program : `exit`](#exit-program)
-    + [Saving the data](#saving-the-data)
-    + [Editing the data file](#editing-the-data-file)
-* [FAQ](#faq)
-* [Known issues](#known-issues)
-* [Command summary](#command-summary)
+- [NetConnect User Guide](#netconnect-user-guide)
+- [Table of Contents](#table-of-contents)
+- [Quick start](#quick-start)
+- [Features](#features)
+  - [Viewing help : `help`](#viewing-help--help)
+  - [Adding a person: `add`](#adding-a-person-add)
+  - [Deleting a person : `delete`](#deleting-a-person--delete)
+  - [Listing all persons : `list`](#listing-all-persons--list)
+  - [Editing a person : `edit`](#editing-a-person--edit)
+  - [Locating persons by name: `find`](#locating-persons-by-name-find)
+  - [Clearing all entries : `clear`](#clearing-all-entries--clear)
+  - [Create Relations between Profiles : `relate`](#create-relations-between-profiles--relate)
+  - [Remove Relations between Profiles : `unrelate`](#remove-relations-between-profiles--unrelate)
+  - [Show Relations Associated to a Person : `showrelated`](#show-relations-associated-to-a-person--showrelated)
+  - [Open on Last State](#open-on-last-state)
+  - [Export Current View to CSV File : `export`](#export-current-view-to-csv-file--export)
+  - [Exiting the program : `exit`](#exiting-the-program--exit)
+  - [Saving the data](#saving-the-data)
+  - [Editing the data file](#editing-the-data-file)
+- [Future Implementations](#future-implementations)
+  - [Truncate text in GUI](#truncate-text-in-gui)
+- [FAQ](#faq)
+- [Known issues](#known-issues)
+- [Command summary](#command-summary)
 
 # Quick start
 
@@ -134,8 +137,10 @@ Examples (Supplier):
 
 **Info:** NetConnect checks for unique profiles by its NAME, PHONE and EMAIL. It does not allow you to create two profiles with identical name, phone number and email.
 
+</section id="fieldsConstraints"> </section>
+
 **Constraints:**
-Constraints for each field. Here are the constraints for each field in the application:
+Here are the constraints for each field in the application:
 
 * `NAME`: Names should only contain alphanumeric characters and spaces, and it should not be blank.
 * `PHONE_NUMBER`: Phone numbers should only contain numbers, and it should be at least 3 digits long to accommodate staff extensions.
@@ -202,21 +207,7 @@ Examples:
 * `edit i/1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person with ID of 1 to be `91234567` and `johndoe@example.com` respectively.
 * `edit i/2 n/Betsy Crower t/` Edits the name of the person with ID of 2 to be `Betsy Crower` and clears all existing tags.
 
-**Constraints:**
-Constraints for each field. Here are the constraints for each field in the application:
-
-* `NAME`: Names should only contain alphanumeric characters and spaces, and it should not be blank.
-* `PHONE_NUMBER`: Phone numbers should only contain numbers, and it should be at least 3 digits long to accommodate staff extensions.
-* `EMAIL`: Emails should be of the format `local-part@domain`. NetConnect does not check for the validity of the domain part, hence extra attention should be put into ensuring no typos are present in the domain part of the email.
-* `ADDRESS`: Addresses can take any format, and it should not be blank.
-* `ROLE`: Roles can only be `client`, `supplier`, or `employee`.
-* `TAG`: Tags should only contain alphanumeric characters and spaces, and it should not be blank.
-* `DEPARTMENT`: Department names should only contain alphanumeric characters and spaces, and it should not be blank.
-* `JOB`: Job titles should only contain alphanumeric characters and spaces, and it should not be blank.
-* `SKILLS`: Skills should only contain alphanumeric characters and spaces, and it should not be blank.
-* `PREFERENCES`: Preferences can take any format, and it should not be blank.
-* `TERMS OF SERVICE`: Terms of service can take any format, and it should not be blank.
-* `PRODUCTS`: Product names should only contain alphanumeric characters and spaces, and it should not be blank.
+Please refer to the [constraints](#fieldsConstraints) for valid input.
 
 </section>
 
